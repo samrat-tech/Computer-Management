@@ -1,0 +1,64 @@
+{% extends "inventory/base.html" %}
+
+{% block content %}
+    <div id="app">
+        <nav>
+            <button class="nav" id="computer">Computers</button>
+            <button class="nav" id="inventory">Purchase</button>
+            <button class="nav" id="sales">Sales</button>
+            <button class="nav" id="finances">Finances</button>
+        </nav>
+        <hr>
+        <div id="interface">
+            <div id="computer-view">
+            </div>
+            <div id="inventory-view">
+                <form id="new-part" method="POST">
+                    <input required type="text" id="part_name" name="part_name" placeholder="Part">
+                    <input required type="number" id="quantity" name="quantity" placeholder="Quantity">
+                    <input required type="number" id="unit_price" name="unit_price" placeholder="Unit Price" step="500">
+                    <button type="submit">Add</button>
+                </form>
+                <ul>
+                </ul>
+            </div>
+            <div id="sales-view">
+                <form id="new-sale" method="POST">
+                    <input required list="computer_items" type="text" id="saled_item" name="saled_item" placeholder="Sale">
+                    <datalist id="computer_items">
+                        {% for name in item_names %}
+                            <option value="{{ name }}">
+                        {% endfor %}
+                    </datalist>
+                    <input required type="datetime-local" id="date_time" name="date_time">
+                    <select disabled required id="timezone" name="timezone">
+                        <option value="UTC">UTC</option>
+                    </select>
+                    <button type="submit">Add</button>
+                </form>
+                <ul>
+                </ul>
+            </div>
+            <div id="finances-view">
+                <div class="metric" id="profit">
+                    <h5>Profit</h5>
+                    <h2></h2>
+                </div>
+                <div class="metric" id="revenue">
+                    <h5>Revenue</h5>
+                    <h2></h2>
+                </div>
+{#                <div class="metric" id="expenses_item">#}
+{#                    <h5>Used Item Costs</h5>#}
+{#                    <h2></h2>#}
+{#                </div>#}
+                <div class="metric" id="expenses">
+                    <h5>Expenses</h5>
+                    <h2></h2>
+                </div>
+            </div>
+            <div id="details-view">
+            </div>
+        </div>
+    </div>
+{% endblock %}
